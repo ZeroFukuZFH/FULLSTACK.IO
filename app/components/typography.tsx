@@ -12,7 +12,7 @@ export function Large({text}:content) {
 
 export function Small({text}:content) {
   return (
-    <p className="leading-7 [&:not(:first-child)]:mt-6">
+    <p className="leading-7 not-first:mt-6">
       {text}
     </p>
   )

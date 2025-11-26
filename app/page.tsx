@@ -14,7 +14,7 @@ const content = {
         beginner:{
             title:"Start Learning",
             desc:"Beginner",
-            body:""
+            body:"Create a Full-Stack Web App using stack components such as HTML,CSS,javascript,PHP, and mongoDB"
         },
         intermediate:{
             title:"Know stuff already?",
@@ -31,19 +31,47 @@ const content = {
             desc:"???",
             body:""
         }
+    },
+    explanation:{
+        head:[
+            'WHAT IS A FULLSTACK APP?',
+        ],
+        sub:[
+            'what is a stack?'
+        ],
+        paragraph:[
+            'lorem ipsum'
+        ],
+
     }
 }
 
-export default function Home(){
-    type levels = 'beginner' | 'intermediate' | 'advanced' | 'custom'
+export default function Page(){
+    
     return (
+        <>
         <div className="h-[120vh] flex flex-col justify-center p-4 gap-10">
             <div className=" flex flex-col p-4 text-center gap-4 overflow-hidden">
                 <Animated element={<Large text={content.title}/>} method="slideIn"/>
                 <Animated element={<Small text={content.body}/>} method="fadeIn"/> 
             </div>          
-            <div className="grid grid-cols-2 grid-rows-2 gap-4 overflow-hidden">
-                {(Object.keys(content.card) as levels[]).map((level,index) => {
+            <Cards/>
+        </div>    
+        <div className="flex w-full  flex-col align-middle  gap-4">
+            <Explanation/>
+        </div>
+        <div className="flex items-center w-full justify-center ">
+            <Socials/>  
+        </div>  
+        </>
+    )
+}
+
+function Cards(){
+    type levels = 'beginner' | 'intermediate' | 'advanced' | 'custom'
+    return (
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 overflow-hidden">
+            {(Object.keys(content.card) as levels[]).map((level,index) => {
                     const card = content.card[level];
                     return (
                         <div key={index} className="overflow-hidden">
@@ -52,9 +80,8 @@ export default function Home(){
                         </div>
                     );
                 })}
-            </div>
-            
-        </div>      
+        </div>
+        
     )
 }
 
@@ -64,7 +91,7 @@ interface AnimatedProps {
     method:string
 }
 
-function Animated({element,delay = 0,method}:AnimatedProps){
+export function Animated({element,delay = 0,method}:AnimatedProps){
     const [node,setNode] = useState<ReactNode>(<div className=""></div>)
     useEffect(()=>{
         setTimeout(()=>{
@@ -104,4 +131,18 @@ function CardLinks({ title, desc, content }: CardLinksProps) {
     );
 }
 
+function Explanation(){
+    return (
+        <>
+        <Large text={content.explanation.head[0]}/>
+        <br/>
+        <Large text={content.explanation.sub[0]}/>
+        <Small text={content.explanation.paragraph[0]}/>
 
+        </>
+    )
+}
+
+function Socials(){
+    return <Large text="Socials"></Large>
+}
