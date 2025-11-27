@@ -1,3 +1,4 @@
+"use client"
 
 import { NavigationMenu, NavigationMenuItem,NavigationMenuViewport, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle"
@@ -68,11 +69,22 @@ const content = {
 
 } as const
 
-export default function NavBar() {
-    type levels = keyof typeof content;
+type levels = keyof typeof content;
 
+export default function NavBar() {
+    return window.innerWidth < 1024 ? <Mobile/> : <Desktop/>
+}
+
+function Mobile(){
+    return(
+        <>
+        </>
+    )
+}
+
+function Desktop(){
     return (
-        <div className="flex flex-col sm:flex-row gap-2 justify-between w-full fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 px-4 py-2 border-b h-[10vh] items-center">
+        <div className="flex flex-col sm:flex-row gap-2 justify-between w-full fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 z-50 px-4 py-2 border-b h-[10vh] items-center">
             <Button variant='default'>My Logo</Button>
 
             <NavigationMenu>
@@ -115,8 +127,10 @@ export default function NavBar() {
                 <Button variant="default">Sign Up</Button>
             </div>
         </div>
-    );
+    )
 }
+
+
 
 interface ListItemProps {
     title:string,
@@ -134,3 +148,4 @@ function ListItem({title='title',desc='children',href=''}:ListItemProps){
         </li>
     )
 }
+

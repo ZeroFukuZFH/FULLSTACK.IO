@@ -1,19 +1,64 @@
-import { useContext, useState } from "react"
+"use client"
+
+import { ChevronDown, Code2, Monitor, Subtitles } from "lucide-react"
+import { useContext, useState, createContext } from "react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { CodeTabs } from '@/components/animate-ui/components/animate/code-tabs';
+import MakeCode from "./add-visualizer-content-components/MakeCode"
+import MakeVisual from "./add-visualizer-content-components/MakeHTML"
+import MakeHTML from "./add-visualizer-content-components/MakeVisual"
 
-import { Input } from "@/components/ui/input"
+const content = [
+  {
+    title: 'none',
+    icon: null
+  },
+  {
+    title: 'code',
+    icon: <Code2 />
+  },
+  {
+    title: 'visual',
+    icon: <Monitor />
+  },
+  {
+    title: 'html',
+    icon: <Subtitles />
+  },
+]
 
-import { Large, Small } from "@/app/components/typography"
+interface VisualizerType {
+  content: typeof content[number];
+  hasContent: boolean;
+}
 
-const useVisualizer = () => {
+interface VisualContextType {
+  visualizer: VisualizerType;
+  setVisualizer: React.Dispatch<React.SetStateAction<VisualizerType>>;
+}
+
+const VisualContext = createContext<VisualContextType | undefined>(undefined);
+
+export const useVisualizer = () => {
   const ctx = useContext(VisualContext);
   if (!ctx) throw new Error("useVisualizer must be used inside VisualContext.Provider");
   return ctx;
 };
 
-function AppVisualizerArea() {
+export function VisualizerProvider({ children }: { children: React.ReactNode }) {
+  const [visualizer, setVisualizer] = useState<VisualizerType>({
+    content: content[0],
+    hasContent: false,
+  });
+
+  return (
+    <VisualContext.Provider value={{ visualizer, setVisualizer }}>
+      {children}
+    </VisualContext.Provider>
+  );
+}
+
+export default function Visualizer() {
   const { visualizer } = useVisualizer()
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -33,77 +78,6 @@ function ChooseVisual({ContentType}:{ContentType:string}){
     )
 }
 
-
-function MakeCode() {
-    
-    const [codes,setCodes] = useState({Sample:`#include <stdio.h>
-
-int main(void){
-    printf("hello world");
-    return 0;
-}`
-    })
-
-    const [temp,setTemp] = useState({lang:'',body:''})
-
-    const handleLang = (event) => {
-        setTemp(prev => ({...prev,lang:event.target.value}))
-    }
-
-    const handleBody = (event) => {
-        setTemp(prev => ({...prev,body:event.target.value}))
-    }
-
-    const handleSubmit = () => {
-        try {
-            if(temp.lang === '' || temp.body === ''){
-                throw new Error('empty arguements')
-            }
-            setCodes(prev => ({...prev,[temp.lang]:temp.body}))
-            setTemp({lang:'',body:''})
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-  return (
-    <>
-    <div className="flex flex-row items-center justify-between">   
-    <div className="border-b pb-4 mb-4 w-full ">
-        <Large text="Add Code Tabs"/>
-    </div>
-    
-    </div>
-    <div className="flex flex-col gap-2">
-        <Textarea placeholder="Place Code here..." onChange={handleBody} value={temp.body} className="h-32 resize-none overflow-auto"/>
-        <div className="flex flex-row gap-2">
-            <Input type="text" placeholder="Language" onChange={handleLang} value={temp.lang}/>
-            <Button onClick={handleSubmit}>submit</Button>
-        </div>
-    </div>
-    
-    <Small text="preview"/>
-    
-    <CodeTabs codes={codes} className="w-full"/> 
-    </>
-  );
-}
-
-
-function MakeVisual(){
-    return(
-        <>
-        </>
-    )
-}
-
-function MakeHTML(){
-    return(
-        <>
-        </>
-    )
-}
-
 function ToggleAppVisual() {
   const { visualizer, setVisualizer } = useVisualizer()
 
@@ -119,7 +93,7 @@ function ToggleAppVisual() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="w-[16%] justify-between flex items-center"
+          className="max-w-[140px] justify-between flex items-center"
         >
           {visualizer.content.title}
           <ChevronDown className="ml-2 h-4 w-4" />
