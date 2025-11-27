@@ -1,6 +1,6 @@
 "use client"
 
-import { NavigationMenu, NavigationMenuItem,NavigationMenuViewport, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuViewport, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,62 +8,97 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group"
-import { Search } from "lucide-react"
+import { Search, Code2 } from "lucide-react"
 
 // test
 const content = {
-    beginner:{
-        title:'Beginner',
-        body:[
+    beginner: {
+        title: 'Beginner',
+        body: [
         {
-            title:'HTML',
-            href:'html',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+            title: 'HTML',
+            href: 'html',
+            desc: 'Learn the foundation of web development with HTML structure and semantics'
         },
         {
-            title:'CSS',
-            href:'css',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+            title: 'CSS',
+            href: 'css',
+            desc: 'Style your websites with modern CSS techniques and responsive design'
         },
         {
-            title:'Javascript',
-            href:'javascript',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+            title: 'JavaScript',
+            href: 'javascript',
+            desc: 'Add interactivity and dynamic behavior to your web applications'
         },
         {
-            title:'PHP',
-            href:'php',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+            title: 'PHP',
+            href: 'php',
+            desc: 'Server-side scripting for building dynamic web applications'
         },
         {
-            title:'MongoDB',
-            href:'mongodb',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+            title: 'MongoDB',
+            href: 'mongodb',
+            desc: 'NoSQL database management for modern web applications'
         }
         ]
     },
-    intermediate:{
-        title:'Intermediate',
-        body:[{
-            title:'REACT',
-            href:'#',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+    intermediate: {
+        title: 'Intermediate',
+        body: [{
+            title: 'REACT',
+            href: '#',
+            desc: 'Build modern user interfaces with the popular React library'
+        },
+        {
+            title: 'Node.js',
+            href: '#',
+            desc: 'Server-side JavaScript runtime for building scalable applications'
+        },
+        {
+            title: 'Express',
+            href: '#',
+            desc: 'Minimal and flexible Node.js web application framework'
+        },
+        {
+            title: 'PostgreSQL',
+            href: '#',
+            desc: 'Powerful open-source relational database system'
         }]
     },
-    advanced:{
-        title:'Advanced',
-        body:[{
-            title:'idkl',
-            href:'#',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+    advanced: {
+        title: 'Advanced',
+        body: [{
+            title: 'Microservices',
+            href: '#',
+            desc: 'Architectural pattern for distributed systems'
+        },
+        {
+            title: 'DevOps',
+            href: '#',
+            desc: 'Development operations and deployment strategies'
+        },
+        {
+            title: 'System Design',
+            href: '#',
+            desc: 'Design scalable and maintainable system architectures'
         }]
     },
-    allcontent:{
-        title:'All References',
-        body:[{
-            title:'idkl',
-            href:'#',
-            desc:'Lorem ipsum dolor sit amet lorem luptatum diam consetetur consetetur no dolore lorem elitr. Aliquyam ut sed nam te molestie sadipscing invidunt at assum duis takimata sadipscing dolore eos dolores. Minim labore lorem et duo aliquyam. Consequat facilisis autem ut tempor eos et sit gubergren consectetuer tempor. Ea vero amet rebum ea et cum. Vero dolore stet euismod et amet at dolor imperdiet sea sit sanctus sit duis. Nonumy takimata eos volutpat sea ea est odio invidunt esse elitr eirmod eirmod. At vero accusam est takimata.'
+    allcontent: {
+        title: 'References',
+        body: [{
+            title: 'Documentation',
+            href: '#',
+            desc: 'Comprehensive guides and API references'
+        },
+        {
+            title: 'Cheat Sheets',
+            href: '#',
+            desc: 'Quick reference for common commands and syntax'
+        },
+        {
+            title: 'Best Practices',
+            href: '#',
+            desc: 'Industry standards and coding conventions'
         }]
     }
 
@@ -72,80 +107,114 @@ const content = {
 type levels = keyof typeof content;
 
 export default function NavBar() {
-    return window.innerWidth < 1024 ? <Mobile/> : <Desktop/>
+    return window.innerWidth < 1024 ? <Mobile /> : <Desktop />
 }
 
-function Mobile(){
-    return(
-        <>
-        </>
-    )
-}
-
-function Desktop(){
+function Mobile() {
     return (
-        <div className="flex flex-col sm:flex-row gap-2 justify-between w-full fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 z-50 px-4 py-2 border-b h-[10vh] items-center">
-            <Button variant='default'>My Logo</Button>
-
-            <NavigationMenu>
-                <NavigationMenuList>
-                    {(Object.keys(content) as levels[]).map((item) => {
-                        const level = content[item];
-                        return (
-                            <NavigationMenuItem key={item}>
-                                <NavigationMenuTrigger>{level.title}</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] h-[250px] shadow-[inset_0_-20px_60px_0px_rgba(0,0,0,0.3)] overflow-auto">
-                                        {level.body.map((item,index)=>{
-                                            return (
-                                                <ListItem key={index.toString()} title={item.title} desc={item.desc} href={item.href}/>
-                                            )
-                                        })}
-                                        <ListItem title={'NOT SURE?'} desc={'create a fullstack app with the given level of difficulty'} href={'#'}/>
-                                    </ul>
-                                    <NavigationMenuLink className="border-t">
-                                        <u>Native App Version Coming Soon!</u>
-                                    </NavigationMenuLink>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
-                        );
-                    })}
-                </NavigationMenuList>
-                <NavigationMenuViewport/>
-            </NavigationMenu>
-            
-            <InputGroup>
-                <InputGroupInput placeholder="Search..." />
-                <InputGroupAddon>
-                <Search />
-                </InputGroupAddon>
-            </InputGroup>
-
+        <div className="lg:hidden flex justify-between items-center w-full fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 z-50 px-4 py-3 border-b h-16">
+            <Button variant="ghost" className="font-bold text-lg">
+                <Code2 className="h-5 w-5 mr-2" />
+                FULLSTACK.IO
+            </Button>
             <div className="flex items-center gap-2">
                 <ModeToggle />
-                <Button variant="outline">Login</Button>
-                <Button variant="default">Sign Up</Button>
+                <Button variant="ghost" size="icon">
+                    <Search className="h-4 w-4" />
+                </Button>
             </div>
         </div>
     )
 }
 
-
-
-interface ListItemProps {
-    title:string,
-    desc:string,
-    href:string
-}
-
-function ListItem({title='title',desc='children',href=''}:ListItemProps){
+function Desktop() {
     return (
-        <li className="overflow-hidden">
-            <NavigationMenuLink href={href}>
-                <h1><b>{title}</b></h1>
-                <p><i>{desc}</i></p>
-            </NavigationMenuLink>
-        </li>
+        <div className="hidden lg:flex items-center justify-between w-full fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 z-50 px-6 py-3 border-b h-16">
+            <Button variant="ghost" className="font-bold text-lg hover:bg-transparent px-2">
+                <Code2 className="h-5 w-5 mr-2" />
+                FULLSTACK.IO
+            </Button>
+
+            <NavigationMenu className="flex-1 max-w-2xl mx-8">
+                <NavigationMenuList className="gap-1">
+                    {(Object.keys(content) as levels[]).map((item) => {
+                        const level = content[item];
+                        return (
+                            <NavigationMenuItem key={item}>
+                                <NavigationMenuTrigger className="text-sm font-medium px-3">
+                                    {level.title}
+                                </NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <div className="p-4 w-[500px]">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            {level.body.map((item, index) => (
+                                                <ListItem 
+                                                    key={index.toString()} 
+                                                    title={item.title} 
+                                                    desc={item.desc} 
+                                                    href={item.href}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className="mt-4 pt-4 border-t">
+                                            <NavigationMenuLink href="#" className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors">
+                                                <div className="flex-1">
+                                                    <h4 className="font-semibold text-sm">Fullstack for Native Apps Coming Soon!</h4>
+                                                    <p className="text-xs text-muted-foreground mt-1">
+                                                        currently under development
+                                                    </p>
+                                                </div>
+                                            </NavigationMenuLink>
+                                        </div>
+                                    </div>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                        );
+                    })}
+                </NavigationMenuList>
+                <NavigationMenuViewport />
+            </NavigationMenu>
+
+            <div className="flex items-center gap-3">
+                <InputGroup className="w-64">
+                    <InputGroupInput placeholder="Search tutorials..." className="text-sm" />
+                    <InputGroupAddon>
+                        <Search className="h-4 w-4" />
+                    </InputGroupAddon>
+                </InputGroup>
+
+                <div className="flex items-center gap-2">
+                    <ModeToggle />
+                    <Button variant="outline" size="sm" className="text-sm">
+                        Login
+                    </Button>
+                    <Button variant="default" size="sm" className="text-sm">
+                        Sign Up
+                    </Button>
+                </div>
+            </div>
+        </div>
     )
 }
 
+interface ListItemProps {
+    title: string,
+    desc: string,
+    href: string
+}
+
+function ListItem({ title = 'title', desc = 'children', href = '' }: ListItemProps) {
+    return (
+        <NavigationMenuLink 
+            href={href}
+            className="block p-3 rounded-lg hover:bg-accent transition-colors group"
+        >
+            <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">
+                {title}
+            </h4>
+            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                {desc}
+            </p>
+        </NavigationMenuLink>
+    )
+}
