@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuViewport, NavigationMenuList, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./mode-toggle"
 import { Button } from "@/components/ui/button"
@@ -107,7 +108,18 @@ const content = {
 type levels = keyof typeof content;
 
 export default function NavBar() {
-    return window.innerWidth < 1024 ? <Mobile /> : <Desktop />
+   const [wSize, setWSize] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setWSize(window.innerWidth);
+    handleResize(); 
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (wSize === null) return null;
+  return wSize < 1024 ? <Mobile/> : <Desktop/>
 }
 
 function Mobile() {
