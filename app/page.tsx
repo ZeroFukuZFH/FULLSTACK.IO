@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRightIcon, BookOpen, Users, Rocket, Sparkles, Github, Twitter, Youtube, Mail } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 const content = {
     title: "FULLSTACK.IO",
@@ -16,37 +17,38 @@ const content = {
             title: "Start Learning",
             desc: "Beginner",
             body: "Create a Full-Stack Web App using stack components such as HTML, CSS, JavaScript, PHP, and MongoDB",
-            icon: <BookOpen className="h-6 w-6" />
+            icon: <BookOpen className="h-6 w-6" />,
         },
         intermediate: {
             title: "Know Stuff Already?",
             desc: "Intermediate",
             body: "Advance your skills with modern frameworks, APIs, and database optimization techniques",
-            icon: <Users className="h-6 w-6" />
+            icon: <Users className="h-6 w-6" />,
         },
         advanced: {
             title: "I Want to Improve",
             desc: "Advanced",
             body: "Master advanced concepts like microservices, DevOps, and system architecture design",
-            icon: <Rocket className="h-6 w-6" />
+            icon: <Rocket className="h-6 w-6" />,
+            url:'advanced'
         },
         custom: {
             title: "Explore",
             desc: "Custom Path",
             body: "Create your own learning journey with personalized projects and mentorship",
-            icon: <Sparkles className="h-6 w-6" />
+            icon: <Sparkles className="h-6 w-6" />,
         }
     },
     explanation: {
-        head: [
-            'WHAT IS A FULLSTACK APP?',
-        ],
-        sub: [
-            'Understanding the Technology Stack'
-        ],
-        paragraph: [
-            'A full-stack application encompasses both front-end and back-end development. The front-end (client-side) handles user interface and experience, while the back-end (server-side) manages data, logic, and server operations. Together, they create complete, functional web applications.'
-        ],
+        head: 'WHAT IS A FULLSTACK APP?',
+        sub: 'Understanding the Technology Stack',
+        paragraph: 'A full-stack application encompasses both front-end and back-end development. The front-end (client-side) handles user interface and experience, while the back-end (server-side) manages data, logic, and server operations. Together, they create complete, functional web applications.'
+    },
+
+    herosection: {
+        head: 'OUR GOAL',
+        sub: 'Make it Simpler',
+        paragraph: 'Are you tired of being given the advice \"Just Google It\" But even googling it takes time and Information is all over the place Me too so that\'s why I made this website. Software Engineering is already hard, compiling all the materials to learn software engineering makes it even harder. This Website was made not to be the one-size fits all in developing full-stack applications, but it was meant to fast-track developers into learning how to do fullstack. ',
     },
 
     socials: [
@@ -101,7 +103,7 @@ function Cards(){
                     const card = content.card[level];
                     return (
                         <div key={index} className="overflow-hidden">
-                            <Animated element={<CardLinks title={card.title} desc={card.desc} content={card.body} icon={card.icon} />} 
+                            <Animated element={<CardLinks title={card.title} desc={card.desc.toLowerCase()} content={card.body} icon={card.icon} />} 
                             delay={index * 100} method="slideIn"/>
                         </div>
                     );
@@ -143,7 +145,7 @@ interface CardLinksProps {
 
 function CardLinks({ title, desc, content, icon }: CardLinksProps) {
     const getVariant = (desc: string) => {
-        switch(desc.toLowerCase()) {
+        switch(desc) {
             case 'beginner': return 'default';
             case 'intermediate': return 'secondary';
             case 'advanced': return 'destructive';
@@ -172,10 +174,13 @@ function CardLinks({ title, desc, content, icon }: CardLinksProps) {
                 </p>
             </CardContent>
             <CardFooter>
-                <Button variant="ghost" className="w-full group/btn justify-between">
+                <Link href={`/${desc}/what-even-is-a-tech-stack-`}>
+                    <Button variant="ghost" className="w-full group/btn justify-between">
                     Start Learning
                     <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                 </Button>
+                </Link>
+                
             </CardFooter>
         </Card>
     );
@@ -189,17 +194,17 @@ function Explanation() {
                     Understanding Full-Stack
                 </Badge>
                 <h2 className="text-4xl font-bold tracking-tight">
-                    {content.explanation.head[0]}
+                    {content.explanation.head}
                 </h2>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8 items-start">
                 <div className="text-left space-y-4">
                     <h3 className="text-2xl font-semibold text-primary">
-                        {content.explanation.sub[0]}
+                        {content.explanation.sub}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                        {content.explanation.paragraph[0]}
+                        {content.explanation.paragraph}
                     </p>
                 </div>
                 
@@ -221,6 +226,25 @@ function Explanation() {
                         </div>
                     </CardContent>
                 </Card>
+                
+            </div>
+
+            <div className="space-y-4">
+                <Badge variant="outline" className="text-sm px-4 py-1">
+                    Understanding our M.O
+                </Badge>
+                <h2 className="text-4xl font-bold tracking-tight">
+                    {content.herosection.head}
+                </h2>
+                <div className="text-left space-y-4">
+                    <h3 className="text-2xl font-semibold text-primary">
+                        {content.herosection.sub}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                        {content.herosection.paragraph}
+                    </p>
+                </div>
+
             </div>
         </div>
     )
