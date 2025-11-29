@@ -23,9 +23,9 @@
   export function AppSidebar({content}:{content:SidebarProps}) {
     return (
       <ContentContext.Provider value={content.title}>
-        <Sidebar className="mt-[10vh] overflow-y-scroll">
-        <div className="p-2">
-        <SidebarHeader><b>{content.title}</b></SidebarHeader>
+        <Sidebar className="overflow-y-scroll ">
+        <div>
+        <SidebarHeader className="pt-[30%]"><b>{content.title}</b></SidebarHeader>
         <SidebarContent>
           {content.items.map((item, index) => (
             <ParentContent key={index} item={item}/>

@@ -19,11 +19,8 @@ export function ContentInterpreter({item}:{item:string}){
         {first === 'visual' && <>{body}</>}
         {first === 'code' && 
         <section className='flex justify-center w-full'>
-        <Code code={body} className="w-[30vw] m-w-[320px] h-[372px]">
-            <CodeHeader copyButton>
-                my-component.tsx
-            </CodeHeader>
-
+        <Code code={body} className="w-[30vw] m-w-[320px] h-auto">
+            <CodeHeader copyButton/>
             <CodeBlock
                 cursor={true}
                 lang="tsx"
