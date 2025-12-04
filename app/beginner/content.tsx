@@ -12,6 +12,12 @@ export const content = {
             "Basic C.R.U.D",
           ],
         },
+        {
+          title:"Project Flow (Important!)",
+          items:[
+            "The layering approach"
+          ]
+        }
       ],
     },
 

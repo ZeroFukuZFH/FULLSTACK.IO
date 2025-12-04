@@ -23,3 +23,16 @@
 .fadeIn {
   animation: fadeIn 2s forwards
 }
+
+@keyframes skateIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.skateIn {
+  animation: skateIn 2s forwards
+}

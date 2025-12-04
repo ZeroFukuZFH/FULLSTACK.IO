@@ -20,14 +20,14 @@
 
   const ContentContext = createContext<string>('')
 
-  export function AppSidebar({content}:{content:SidebarProps}) {
+  export function AppSidebar({content}:{content?:SidebarProps}) {
     return (
-      <ContentContext.Provider value={content.title}>
+      <ContentContext.Provider value={content?.title ? content.title : ''}>
         <Sidebar className="overflow-y-scroll ">
         <div>
-        <SidebarHeader className="pt-[30%]"><b>{content.title}</b></SidebarHeader>
+        <SidebarHeader className="pt-[30%]"><b>{content?.title}</b></SidebarHeader>
         <SidebarContent>
-          {content.items.map((item, index) => (
+          {content?.items.map((item, index) => (
             <ParentContent key={index} item={item}/>
           ))}
         </SidebarContent>
