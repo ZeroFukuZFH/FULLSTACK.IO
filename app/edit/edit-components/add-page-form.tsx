@@ -5,15 +5,18 @@ import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
-
+import axios from 'axios'
+import { useTopicData } from "./topic-data-provider";
 interface PageProps {
   title: string;
   type: string;
-
 }
 
 export function AddPageForm() {
+
   const [newPage, setNewPage] = useState<PageProps>({ title: '', type: ''});
+
+  const { refreshPages } = useTopicData(); 
 
   const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setNewPage(prev => ({ ...prev, title: e.target.value }));
@@ -23,9 +26,31 @@ export function AddPageForm() {
     setNewPage(prev => ({ ...prev, type: e.target.value }));
   };
 
+  const handleSave = () => {
+    const postNewTopic = async ({title,type}:PageProps) => {
+      try {
+        await axios.post("http://localhost:3001/topics",{
+          title:title,
+          type:type,
+          items:[]
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        await refreshPages()
+      } catch (error) {
+        console.error(error)
+      }
+    } 
+    postNewTopic(newPage)
+  }
   const handleCancel = () => {
     setNewPage({ title: '', type: ''}); // Reset form
   };
+  
 
   return (
     <DropdownMenuContent>
@@ -52,7 +77,7 @@ export function AddPageForm() {
             />
           </Field>
           <Field orientation={'horizontal'} className="justify-end">
-            <Button className="w-[100px]" variant={'default'}>
+            <Button className="w-[100px]" variant={'default'} onClick={handleSave}>
               save
             </Button>
             <Button className="w-[100px]" variant={'outline'} onClick={handleCancel}>
