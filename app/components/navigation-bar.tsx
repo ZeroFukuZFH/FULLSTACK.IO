@@ -118,9 +118,10 @@ export default function NavBar() {
   useEffect(() => {
     const handleResize = () => setWSize(window.innerWidth);
     handleResize(); 
-
+    console.log('debug log : started - navbar')
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+    
   }, []);
 
   if (wSize === null) return null;

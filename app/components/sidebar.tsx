@@ -13,7 +13,7 @@
       title:string
       items:ChildProps[]
   }
-  interface SidebarProps {
+  export interface SidebarProps {
     title:string
     items:ParentProps[]
   }
